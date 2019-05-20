@@ -1,0 +1,18 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# En vez de actualizar, solo agregar o remover
+GET 	/words/						controllers.WordController.index
+POST 	/words/						controllers.WordController.store
+DELETE 	/words/						controllers.WordController.delete
+
+# Todos los tweets
+GET 	/tweets/ 					controllers.TweetController.index
+GET 	/tweets/:id					controllers.TweetController.getById(id: String)
+GET 	/tweets/by-word/:word		controllers.TweetController.getByWord(word: String)
+
+# OPTIONS /*path                      controllers.Application.options(path)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
