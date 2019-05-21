@@ -12,7 +12,7 @@ GET 	/tweets/ 					controllers.TweetController.index
 GET 	/tweets/:id					controllers.TweetController.getById(id: String)
 GET 	/tweets/by-word/:word		controllers.TweetController.getByWord(word: String)
 
-# OPTIONS /*path                      controllers.Application.options(path)
+OPTIONS /*path                      controllers.Application.options(path)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

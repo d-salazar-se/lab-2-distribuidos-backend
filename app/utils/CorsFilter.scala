@@ -9,7 +9,8 @@ case class CorsFilter() extends Filter{
     Logger.debug("[cors] filtering request to add cors")
       f(request).map{_.withHeaders(
         "Access-Control-Allow-Origin" -> "*",
-        "Access-Control-Allow-Headers" -> "Accept, Origin, Content-type, X-Json, X-Prototype-Version, X-Requested-With"
+        "Access-Control-Allow-Headers" -> "Accept, Origin, Content-type, X-Json, X-Prototype-Version, X-Requested-With",
+        "Access-Control-Allow-Methods" -> "GET, POST, DELETE, OPTIONS"
       )}
     }
 }
