@@ -1,24 +1,20 @@
-Teispes myBlog Application
+La base de este proyecto se puede encontrar aqui:
+https://github.com/ehsanmx/Teispes-myblog
 
-These are the technologies that we are using in this example :
+
+Tecnologías usadas
 
 • Scala 2.11.1
 • Play! Framework 2.3.6
 • Play-Reactivemongo 0.10.5.0.akka23 (MongoDB Driver)
 • MongoDB 2.6.3
-• Angularjs
-• Bootstrap
 
+Como correr el proyecto:
 
-How to run the example:
+1.- en MongoDB
+> use distribuidos
+> db.createCollection("tweets")
+> db.createCollection("words")
 
-1- Start the MongoDB
-2- Run the mongo client :
-3- Enter the following commands:
-        use myblog;
-        db.createCollection("post");
-4- Go to myblog folder
-5- Enter the following commands:
+2.- Haz correr el activador
     ./activator run
-6- Go to myblog-ui folder and open the index.html
-7- Enjoy!
