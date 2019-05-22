@@ -18,36 +18,34 @@ object TweetController extends Controller with MongoController{
   import models._
   import models.JsonTweetFormats._
 
-  def index = Action.async {
-    val cursor: Cursor[Tweet] = collection.find(Json.obj()).cursor[Tweet]
+  def index(limit: Int) = Action.async {
+    val cursor: Cursor[Tweet] = collection.find(Json.obj()).sort(Json.obj("_id" -> -1)).cursor[Tweet]
 
-    val futureTweetsList: Future[List[Tweet]] = cursor.collect[List]()
-
-    futureTweetsList.map { tweets =>
-      Ok(Json.toJson(tweets))
-    }
-  }
-
-  def getById(id: String) = Action.async {
-    val cursor: Cursor[Tweet] = collection.find(Json.obj(
-      "_id" -> id
-    )).cursor[Tweet]
-
-    val futureTweetsList: Future[List[Tweet]] = cursor.collect[List]()
+    val futureTweetsList: Future[List[Tweet]] = cursor.collect[List](limit)
 
     futureTweetsList.map { tweets =>
       Ok(Json.toJson(tweets))
     }
   }
 
-  def getByWord(word: String) = Action.async {
+  def getById(id: Long) = Action.async {
+    val cursor: Cursor[Tweet] = collection.find(Json.obj("id" -> id)).cursor[Tweet]
+
+    val futureTweetsList: Future[List[Tweet]] = cursor.collect[List](1)
+
+    futureTweetsList.map { tweets =>
+      Ok(Json.toJson(tweets))
+    }
+  }
+
+  def getByWord(word: String, limit: Int) = Action.async {
     val cursor: Cursor[Tweet] = collection.find(Json.obj(
       "text" -> Json.obj(
         "$regex" -> (".*" + word + ".*")
       )
-    )).cursor[Tweet]
+    )).sort(Json.obj("_id" -> -1)).cursor[Tweet]
 
-    val futureTweetsList: Future[List[Tweet]] = cursor.collect[List]()
+    val futureTweetsList: Future[List[Tweet]] = cursor.collect[List](limit)
 
     futureTweetsList.map { tweets =>
       Ok(Json.toJson(tweets))
